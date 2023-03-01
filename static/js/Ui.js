@@ -1,7 +1,23 @@
 export default class Ui {
-  constructor() {
+  constructor(camera, generateWhitePawns, generateBlackPawns) {
+    this.camera = camera;
+    this.generateWhitePawns = generateWhitePawns;
+    this.generateBlackPawns = generateBlackPawns;
     this.createLogin();
+    this.createOverlay();
   }
+
+  createOverlay = () => {
+    let overlay = document.createElement("div");
+    overlay.id = "overlay";
+    overlay.className = "overlay";
+    let overlayText = document.createElement("div");
+    overlayText.id = "overlayText";
+    overlayText.className = "overlayText";
+    overlayText.innerHTML = "<span style='color: lime;'>STATUS: OK</span>";
+    overlay.append(overlayText);
+    document.body.append(overlay);
+  };
 
   createLogin = () => {
     let loginWrapper = document.createElement("div");
@@ -32,6 +48,21 @@ export default class Ui {
               alert("Person with this nickname already exists");
             } else if (data.response === "ok") {
               this.closeLogin();
+              if (data.users.length === 1) {
+                document.getElementById(
+                  "overlayText"
+                ).innerHTML = `Witaj, ${data.user}, <br> grasz <span style='color: violet'>białymi</span>`;
+                this.camera.position.set(0, 350, 250);
+                this.camera.lookAt(0, 0, 0);
+                this.generateWhitePawns();
+              } else if (data.users.length === 2) {
+                document.getElementById(
+                  "overlayText"
+                ).innerHTML = `Witaj, ${data.user}, <br> grasz <span style='color: red'>czarnymi</span>`;
+                this.camera.position.set(0, 350, -250);
+                this.camera.lookAt(0, 0, 0);
+                this.generateBlackPawns();
+              }
             } else if (data.response === "full") {
               alert("The game is full");
             }
