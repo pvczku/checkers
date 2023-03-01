@@ -13,4 +13,10 @@ window.onload = () => {
   game.generateBoard();
   game.generateWhitePawns();
   game.generateBlackPawns();
+
+  window.addEventListener("resize", () => {
+    game.camera.aspect = window.innerWidth / window.innerHeight;
+    game.camera.updateProjectionMatrix();
+    game.renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 };
