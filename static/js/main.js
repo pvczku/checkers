@@ -8,11 +8,11 @@ let ui;
 window.onload = () => {
   game = new Game();
   net = new Net();
-  ui = new Ui();
+  ui = new Ui(game.camera, game.generateWhitePawns, game.generateBlackPawns);
 
   game.generateBoard();
-  game.generateWhitePawns();
-  game.generateBlackPawns();
+  // game.generateWhitePawns();
+  // game.generateBlackPawns();
 
   window.addEventListener("resize", () => {
     game.camera.aspect = window.innerWidth / window.innerHeight;
