@@ -15,8 +15,10 @@ export default class Pawn extends THREE.Mesh {
   generatePawn = (i) => {
     if (i === 1) {
       this.material.color.setHex(this.pawnColors[1]);
+      this.color = "white";
       return new THREE.Mesh(this.geometry, this.material);
     } else if (i === 2) {
+      this.color = "black";
       this.material.color.setHex(this.pawnColors[0]);
       return new THREE.Mesh(this.geometry, this.material);
     } else return null;
