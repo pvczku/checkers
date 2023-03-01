@@ -33,7 +33,7 @@ app.post("/ADD_USER", (req, res) => {
     }
     if (theSame === false) {
       users.push(req.body.user);
-      res.send({ response: "ok", users: users });
+      res.send({ response: "ok", users: users, user: req.body.user });
       return;
     } else {
       res.send({ response: "error", users: users });
