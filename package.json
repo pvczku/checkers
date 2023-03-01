@@ -1,0 +1,24 @@
+{
+  "name": "checkers",
+  "version": "1.0.0",
+  "description": "Checkers made in WebGL with the ExpressJS server as a backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pvczku/checkers.git"
+  },
+  "author": "Patryk Kulma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pvczku/checkers/issues"
+  },
+  "homepage": "https://github.com/pvczku/checkers#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.6.1"
+  }
+}
