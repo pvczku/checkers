@@ -6,7 +6,7 @@ export default class Game {
         this.camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 10000  );
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setClearColor(0x0066ff);
-        this.renderer.setSize(600, 600);
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById("root").append(this.renderer.domElement);
     
         this.camera.position.set(100,100,100)
