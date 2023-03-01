@@ -4,7 +4,7 @@ import BoardPart from "./BoardPart.js";
 export default class Game {
   constructor() {
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 10000);
+    this.camera = new THREE.PerspectiveCamera(70, 4 / 3, 0.1, 10000);
     this.renderer = new THREE.WebGLRenderer();
     this.axes = new THREE.AxesHelper(1000);
     this.board = [
