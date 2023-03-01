@@ -9,6 +9,6 @@ const socketio = new Server(server);
 app.use(express.json());
 app.use(express.static('static'));
 
-app.get('/', (req, res) => res.render("index.html"));
+app.get('/', (req, res) => res.render("./index.html"));
 
 server.listen(PORT, () => console.log(`server works at ${PORT}`));
