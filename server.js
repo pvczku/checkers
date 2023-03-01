@@ -6,6 +6,7 @@ const server = http.createServer(app);
 const {Server} = require('socket.io');
 const socketio = new Server(server);
 
+app.use(express.json());
 app.use(express.static('static'));
 
 app.get('/', (req, res) => res.render("index.html"));
