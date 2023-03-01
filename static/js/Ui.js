@@ -1,5 +1,7 @@
 export default class Ui {
-  constructor() {}
+  constructor() {
+    this.createLogin();
+  }
 
   createLogin = () => {
     let loginWrapper = document.createElement("div");
