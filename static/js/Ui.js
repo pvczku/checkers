@@ -55,6 +55,7 @@ export default class Ui {
                 this.camera.position.set(0, 350, 250);
                 this.camera.lookAt(0, 0, 0);
                 this.generateWhitePawns();
+                this.createWaitingForPlayer();
               } else if (data.users.length === 2) {
                 document.getElementById(
                   "overlayText"
@@ -93,5 +94,22 @@ export default class Ui {
 
   closeLogin = () => {
     document.getElementById("loginWrapper").remove();
+  };
+
+  createWaitingForPlayer = () => {
+    let waitingBackground = document.createElement("div");
+    waitingBackground.className = "waitingBackground";
+    waitingBackground.id = "waitingBackground";
+    let waitingText = document.createElement("h2");
+    waitingText.className = "waitingText";
+    waitingText.id = "waitingText";
+    waitingText.innerText = "Czekam na drugiego gracza...";
+    let loadingAnimationWrapper = document.createElement("div");
+    loadingAnimationWrapper.id = "loadingAnimationWrapper";
+    loadingAnimationWrapper.className = "lds-ring";
+    let ring = document.createElement("div");
+    loadingAnimationWrapper.append(ring, ring, ring, ring);
+    waitingBackground.append(waitingText, loadingAnimationWrapper);
+    document.body.append(waitingBackground);
   };
 }
