@@ -6,13 +6,12 @@ let game;
 let net;
 let ui;
 window.onload = () => {
+  const client = io();
   game = new Game();
-  net = new Net();
+  net = new Net(client);
   ui = new Ui(game.camera, game.generateWhitePawns, game.generateBlackPawns);
 
   game.generateBoard();
-  // game.generateWhitePawns();
-  // game.generateBlackPawns();
 
   window.addEventListener("resize", () => {
     game.camera.aspect = window.innerWidth / window.innerHeight;

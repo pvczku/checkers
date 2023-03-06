@@ -1,5 +1,5 @@
 export default class Net {
-    constructor() {
-        
-    }
+  constructor(client) {
+    this.client = client;
+  }
 }
