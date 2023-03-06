@@ -47,4 +47,12 @@ app.post("/RESET", (req, res) => {
   res.send({ response: "ok" });
 });
 
+socketio.on("connection", (client) => {
+  console.log("klient podłączył się z id: " + client.id);
+
+  client.on('disconnect', () => {
+    
+  }
+)});
+
 server.listen(PORT, () => console.log(`server works at ${PORT}`));
