@@ -36,7 +36,7 @@ app.post("/ADD_USER", (req, res) => {
       res.send({ response: "ok", users: users, user: req.body.user });
       return;
     } else {
-      res.send({ response: "error", users: users });
+      res.send({ response: "error" });
       return;
     }
   }
@@ -49,10 +49,16 @@ app.post("/RESET", (req, res) => {
 
 socketio.on("connection", (client) => {
   console.log("klient podłączył się z id: " + client.id);
+  client.on("waitForPlayer", (data) => {
+    if (users.length === 2) {
+      client.broadcast.emit("secondPlayerConnected", { user: data.user });
+      // socketio.emit("startGame", { users: users });
+    }
+  });
 
-  client.on('disconnect', () => {
-    
-  }
-)});
+  client.on("disconnect", () => {
+    console.log("no kolega z id: " + client.id + " sie rozlaczyl");
+  });
+});
 
 server.listen(PORT, () => console.log(`server works at ${PORT}`));

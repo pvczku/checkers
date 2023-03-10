@@ -1,23 +1,12 @@
 export default class Ui {
-  constructor(camera, generateWhitePawns, generateBlackPawns) {
+  constructor(camera, generateWhitePawns, generateBlackPawns, client) {
     this.camera = camera;
     this.generateWhitePawns = generateWhitePawns;
     this.generateBlackPawns = generateBlackPawns;
+    this.client = client;
     this.createLogin();
     this.createOverlay();
   }
-
-  createOverlay = () => {
-    let overlay = document.createElement("div");
-    overlay.id = "overlay";
-    overlay.className = "overlay";
-    let overlayText = document.createElement("div");
-    overlayText.id = "overlayText";
-    overlayText.className = "overlayText";
-    overlayText.innerHTML = "<span style='color: lime;'>STATUS: OK</span>";
-    overlay.append(overlayText);
-    document.body.append(overlay);
-  };
 
   createLogin = () => {
     let loginWrapper = document.createElement("div");
@@ -63,7 +52,12 @@ export default class Ui {
                 this.camera.position.set(0, 350, -250);
                 this.camera.lookAt(0, 0, 0);
                 this.generateBlackPawns();
+                this.client.on("secondPlayerConnected", (data) => {
+                  document.querySelectorAll(".overlayText")[0].innerHTML +=
+                    "<br>grasz z graczem " + data.user;
+                });
               }
+              this.client.emit("waitForPlayer", { user: data.user });
             } else if (data.response === "full") {
               alert("The game is full");
             }
@@ -111,5 +105,22 @@ export default class Ui {
     loadingAnimationWrapper.append(ring, ring, ring, ring);
     waitingBackground.append(waitingText, loadingAnimationWrapper);
     document.body.append(waitingBackground);
+  };
+
+  removeWaitingForPlayer = () => {
+    if (document.getElementById("waitingBackground")) {
+      document.getElementById("waitingBackground").remove();
+    }
+  };
+  createOverlay = () => {
+    let overlay = document.createElement("div");
+    overlay.id = "overlay";
+    overlay.className = "overlay";
+    let overlayText = document.createElement("div");
+    overlayText.id = "overlayText";
+    overlayText.className = "overlayText";
+    overlayText.innerHTML = "<span style='color: lime;'>STATUS: OK</span>";
+    overlay.append(overlayText);
+    document.body.append(overlay);
   };
 }

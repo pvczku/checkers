@@ -5,17 +5,12 @@ import Ui from "./Ui.js";
 let game;
 let net;
 let ui;
+let users;
 window.onload = () => {
   const client = io();
   game = new Game();
+  ui = new Ui(game.camera, game.generateWhitePawns, game.generateBlackPawns, client);
   net = new Net(client);
-  ui = new Ui(game.camera, game.generateWhitePawns, game.generateBlackPawns);
 
   game.generateBoard();
-
-  window.addEventListener("resize", () => {
-    game.camera.aspect = window.innerWidth / window.innerHeight;
-    game.camera.updateProjectionMatrix();
-    game.renderer.setSize(window.innerWidth, window.innerHeight);
-  });
 };
